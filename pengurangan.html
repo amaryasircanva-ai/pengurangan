@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pembelajaran: Pengurangan Bersusun</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #3b82f6;
+            --secondary-green: #10b981;
+            --borrow-orange: #f97316;
+            --answer-purple: #8b5cf6;
+            --bg-playful: #f0f9ff;
+            --card-white: #ffffff;
+            --text-dark: #1e293b;
+            --border-radius-lg: 20px;
+            --border-radius-sm: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Fredoka', 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-playful);
+            background-image: radial-gradient(#cbd5e1 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Navigasi Topbar */
+        .nav-topbar {
+            width: 100%;
+            max-width: 820px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            background: #ffffff;
+            color: var(--text-dark);
+            font-weight: 600;
+            padding: 10px 18px;
+            border-radius: var(--border-radius-sm);
+            border: 2px solid #e2e8f0;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: #f8fafc;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-btn.btn-back {
+            background: var(--primary-blue);
+            color: #ffffff;
+            border-color: #2563eb;
+            box-shadow: 0 4px 0 #1d4ed8;
+        }
+
+        .nav-btn.btn-back:hover {
+            background: #2563eb;
+            box-shadow: 0 6px 0 #1d4ed8;
+        }
+
+        .app-container {
+            background: var(--card-white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.15);
+            border: 4px solid #e0f2fe;
+            width: 100%;
+            max-width: 820px;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 3px dashed #cbd5e1;
+            padding-bottom: 16px;
+        }
+
+        header h1 {
+            color: var(--primary-blue);
+            font-size: 2.2rem;
+            text-shadow: 2px 2px 0px #dbeafe;
+            letter-spacing: 0.5px;
+        }
+
+        header p {
+            color: #64748b;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+            padding: 12px 16px;
+            border-radius: 16px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        select, button, input[type="number"] {
+            padding: 10px 14px;
+            border-radius: var(--border-radius-sm);
+            border: 2px solid #cbd5e1;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        select:focus, input[type="number"]:focus {
+            border-color: var(--primary-blue);
+        }
+
+        button {
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 0 #1d4ed8;
+            transform: translateY(0);
+        }
+
+        button:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #1d4ed8;
+        }
+
+        button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #1d4ed8;
+        }
+
+        .btn-hint {
+            background-color: #f59e0b;
+            box-shadow: 0 4px 0 #b45309;
+        }
+        .btn-hint:hover { box-shadow: 0 6px 0 #b45309; }
+
+        .btn-next {
+            background-color: var(--secondary-green);
+            box-shadow: 0 4px 0 #047857;
+            font-size: 1.1rem;
+        }
+        .btn-next:hover { box-shadow: 0 6px 0 #047857; }
+
+        /* Workspace & Dynamic Grid Alignment */
+        .workspace-wrapper {
+            display: flex;
+            justify-content: center;
+            background: #ffffff;
+            padding: 20px 10px;
+            border-radius: var(--border-radius-lg);
+            border: 3px solid #f1f5f9;
+        }
+
+        .workspace-grid {
+            display: grid;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .place-header {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #64748b;
+            text-align: center;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 4px;
+        }
+
+        .box-cell {
+            width: 72px;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            border-radius: 14px;
+            position: relative;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .borrow-box {
+            width: 72px;
+            height: 48px;
+            border: 2.5px dashed var(--borrow-orange);
+            background: #fff7ed;
+            color: var(--borrow-orange);
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-align: center;
+            border-radius: 12px;
+            outline: none;
+            margin: 0 auto;
+        }
+
+        .num-top {
+            background-color: #eff6ff;
+            color: var(--primary-blue);
+            border: 3px solid #bfdbfe;
+        }
+
+        .num-bottom {
+            background-color: #f0fdf4;
+            color: var(--secondary-green);
+            border: 3px solid #bbf7d0;
+        }
+
+        .num-ans {
+            width: 72px;
+            height: 70px;
+            background-color: #faf5ff;
+            color: var(--answer-purple);
+            border: 3px solid #e9d5ff;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            border-radius: 14px;
+            outline: none;
+            margin: 0 auto;
+        }
+
+        .strikethrough::after {
+            content: '';
+            position: absolute;
+            width: 85%;
+            height: 4px;
+            background-color: #ef4444;
+            border-radius: 2px;
+            transform: rotate(-35deg);
+        }
+
+        .active-column {
+            background-color: #fef3c7 !important;
+            border-color: #f59e0b !important;
+            box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.25);
+        }
+
+        .grid-divider {
+            height: 4px;
+            background-color: #334155;
+            border-radius: 2px;
+            margin: 8px 0;
+            position: relative;
+        }
+
+        .grid-divider::before {
+            content: "−";
+            position: absolute;
+            right: -32px;
+            top: -24px;
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: #334155;
+        }
+
+        .feedback-box {
+            background-color: #f8fafc;
+            border: 3px solid #e2e8f0;
+            border-left: 8px solid var(--primary-blue);
+            padding: 16px 20px;
+            border-radius: var(--border-radius-sm);
+            font-size: 1.15rem;
+            font-weight: 600;
+            min-height: 65px;
+            display: flex;
+            align-items: center;
+            color: #334155;
+        }
+
+        .custom-input-card {
+            background: #f1f5f9;
+            padding: 12px 18px;
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Thumbs Up Celebration Popup */
+        .celebration-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .celebration-card {
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .thumbs-up-icon {
+            font-size: 6rem;
+            display: inline-block;
+            animation: thumbsPulse 1s infinite alternate;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes thumbsPulse {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.15) rotate(10deg); }
+        }
+
+        footer {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        @media (max-width: 600px) {
+            .nav-topbar {
+                flex-direction: row;
+            }
+            .nav-btn {
+                font-size: 0.8rem;
+                padding: 8px 12px;
+            }
+            .box-cell, .num-ans {
+                width: 48px;
+                height: 52px;
+                font-size: 1.3rem;
+            }
+
+            .borrow-box {
+                width: 48px;
+                height: 38px;
+                font-size: 1rem;
+            }
+
+            .place-header { font-size: 0.65rem; }
+            .grid-divider::before { right: -20px; font-size: 2rem; top: -18px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigasi Tombol Kembali -->
+<nav class="nav-topbar">
+    <a href="../index.html" class="nav-btn">🏠 Dashboard FERLINK</a>
+    <a href="../matematika.html" class="nav-btn btn-back">← Kembali ke Matematika</a>
+</nav>
+
+<div class="app-container">
+    <header>
+        <h1>✏️ Pengurangan Bersusun</h1>
+        <p>Belajar Berhitung Nilai Tempat Jadi Mudah & Seru!</p>
+    </header>
+
+    <div class="controls">
+        <div class="control-group">
+            <label for="digit-select"><b>Jangkauan Bilangan:</b></label>
+            <select id="digit-select" onchange="initGame()">
+                <option value="4">Ribuan (4 Digit)</option>
+                <option value="5">Puluh Ribuan (5 Digit)</option>
+                <option value="6" selected>Ratus Ribuan (6 Digit)</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label for="level-select"><b>Kondisi:</b></label>
+            <select id="level-select" onchange="initGame()">
+                <option value="1">Tanpa Meminjam</option>
+                <option value="2" selected>Meminjam 1 Kali</option>
+                <option value="3">Meminjam Berkali-kali</option>
+            </select>
+        </div>
+
+        <button onclick="initGame()">🔄 Soal Baru</button>
+    </div>
+
+    <div class="custom-input-card">
+        <div class="control-group">
+            <span><b>Atau Buat Soal Sendiri:</b></span>
+        </div>
+        <div class="control-group">
+            <input type="number" id="custom-num1" placeholder="Bil. Atas">
+            <span>−</span>
+            <input type="number" id="custom-num2" placeholder="Bil. Bawah">
+            <button onclick="setCustomProblem()">Set Soal</button>
+        </div>
+    </div>
+
+    <div class="workspace-wrapper">
+        <div class="workspace-grid" id="workspace-grid">
+            <!-- Grid di-generate dinamis lewat JavaScript -->
+        </div>
+    </div>
+
+    <div class="feedback-box" id="feedback">
+        Petunjuk langkah akan muncul di sini.
+    </div>
+
+    <div class="controls" style="background: transparent; border: none; padding: 0;">
+        <button class="btn-hint" onclick="showHint()">💡 Bantuan</button>
+        <button class="btn-next" onclick="validateCurrentStep()">Cek & Lanjut ➔</button>
+    </div>
+</div>
+
+<!-- Animasi Pop-up Jempol Selesai -->
+<div class="celebration-overlay" id="celebration">
+    <div class="celebration-card">
+        <div class="thumbs-up-icon">👍</div>
+        <h2 style="color: var(--primary-blue); margin-top: 10px; font-size: 2rem;">Luar Biasa!</h2>
+        <p style="font-size: 1.2rem; color: #475569; margin: 10px 0;">Kamu berhasil menyelesaikan seluruh perhitungan dengan benar!</p>
+        <button onclick="closeCelebration()" style="margin-top: 15px; font-size: 1.1rem; padding: 12px 24px;">Lanjut Soal Berikutnya 🚀</button>
+    </div>
+</div>
+
+<footer>
+    Copyright © 2026 Ferlink by Robie Ferli. All rights reserved.
+</footer>
+
+<script>
+    let numDigits = 6;
+    let num1 = 543216;
+    let num2 = 278459;
+    let currentStep = 5; 
+    let workingTop = [];
+
+    const allPlaceNames = ["Ratus Ribuan", "Puluh Ribuan", "Ribuan", "Ratusan", "Puluhan", "Satuan"];
+    const allHeaderTitles = ["Ratus<br>Ribu", "Puluh<br>Ribu", "Ribuan", "Ratusan", "Puluhan", "Satuan"];
+
+    function initGame() {
+        numDigits = parseInt(document.getElementById("digit-select").value);
+        const level = document.getElementById("level-select").value;
+
+        // Generate angka acak/preset sesuai jumlah digit & level
+        if (numDigits === 4) {
+            num1 = level === "1" ? 8765 : (level === "2" ? 7432 : 5000);
+            num2 = level === "1" ? 2341 : (level === "2" ? 2819 : 2789);
+        } else if (numDigits === 5) {
+            num1 = level === "1" ? 87654 : (level === "2" ? 54321 : 50000);
+            num2 = level === "1" ? 23412 : (level === "2" ? 27845 : 27849);
+        } else {
+            num1 = level === "1" ? 543876 : (level === "2" ? 543216 : 500000);
+            num2 = level === "1" ? 221345 : (level === "2" ? 278459 : 278459);
+        }
+
+        buildGridUI();
+        setupBoard();
+    }
+
+    function buildGridUI() {
+        const grid = document.getElementById("workspace-grid");
+        grid.style.gridTemplateColumns = `repeat(${numDigits}, 72px)`;
+        grid.innerHTML = "";
+
+        const startIndex = 6 - numDigits;
+
+        // Row 1: Headers
+        for (let i = startIndex; i < 6; i++) {
+            grid.innerHTML += `<div class="place-header">${allHeaderTitles[i]}</div>`;
+        }
+
+        // Row 2: Borrow Boxes
+        for (let i = startIndex; i < 6; i++) {
+            grid.innerHTML += `<input type="number" id="borrow-${i}" class="borrow-box">`;
+        }
+
+        // Row 3: Top Numbers
+        for (let i = startIndex; i < 6; i++) {
+            grid.innerHTML += `<div id="top-${i}" class="box-cell num-top">0</div>`;
+        }
+
+        // Row 4: Bottom Numbers
+        for (let i = startIndex; i < 6; i++) {
+            grid.innerHTML += `<div id="bottom-${i}" class="box-cell num-bottom">0</div>`;
+        }
+
+        // Row 5: Divider
+        grid.innerHTML += `<div class="grid-divider" style="grid-column: span ${numDigits};"></div>`;
+
+        // Row 6: Answer Boxes
+        for (let i = startIndex; i < 6; i++) {
+            grid.innerHTML += `<input type="number" id="ans-${i}" class="num-ans" placeholder="?">`;
+        }
+    }
+
+    function setCustomProblem() {
+        const val1 = parseInt(document.getElementById("custom-num1").value);
+        const val2 = parseInt(document.getElementById("custom-num2").value);
+
+        if (isNaN(val1) || isNaN(val2) || val1 < val2) {
+            alert("Harap masukkan dua bilangan valid! Bilangan Atas harus lebih besar dari Bilangan Bawah.");
+            return;
+        }
+
+        numDigits = String(val1).length;
+        if (numDigits < 4) numDigits = 4;
+        if (numDigits > 6) numDigits = 6;
+
+        document.getElementById("digit-select").value = numDigits;
+
+        num1 = val1;
+        num2 = val2;
+
+        buildGridUI();
+        setupBoard();
+    }
+
+    function setupBoard() {
+        currentStep = 5;
+        const startIndex = 6 - numDigits;
+
+        const str1 = String(num1).padStart(6, '0');
+        const str2 = String(num2).padStart(6, '0');
+        workingTop = str1.split('').map(Number);
+
+        for (let i = startIndex; i < 6; i++) {
+            document.getElementById(`borrow-${i}`).value = "";
+            document.getElementById(`top-${i}`).innerText = str1[i];
+            document.getElementById(`top-${i}`).classList.remove("strikethrough");
+            document.getElementById(`bottom-${i}`).innerText = str2[i];
+            document.getElementById(`ans-${i}`).value = "";
+        }
+
+        updateStepUI();
+    }
+
+    function updateStepUI() {
+        const startIndex = 6 - numDigits;
+
+        for (let i = startIndex; i < 6; i++) {
+            document.getElementById(`top-${i}`).classList.remove("active-column");
+            document.getElementById(`borrow-${i}`).classList.remove("active-column");
+            document.getElementById(`ans-${i}`).classList.remove("active-column");
+            document.getElementById(`ans-${i}`).disabled = i !== currentStep;
+            document.getElementById(`borrow-${i}`).disabled = i > currentStep;
+        }
+
+        if (currentStep >= startIndex) {
+            document.getElementById(`top-${currentStep}`).classList.add("active-column");
+            document.getElementById(`borrow-${currentStep}`).classList.add("active-column");
+            document.getElementById(`ans-${currentStep}`).classList.add("active-column");
+            document.getElementById(`ans-${currentStep}`).focus();
+
+            document.getElementById("feedback").innerHTML = `🎯 <b>Langkah ${6 - currentStep}:</b> Kerjakan kolom <b>${allPlaceNames[currentStep]}</b>.`;
+        } else {
+            document.getElementById("feedback").innerHTML = `🎉 <b>Hore, Luar Biasa!</b> Seluruh soal berhasil diselesaikan! 🌟`;
+            showCelebration();
+        }
+    }
+
+    function validateCurrentStep() {
+        const startIndex = 6 - numDigits;
+        if (currentStep < startIndex) return;
+
+        const str2 = String(num2).padStart(6, '0');
+        const digitBottom = parseInt(str2[currentStep]);
+        const userAns = document.getElementById(`ans-${currentStep}`).value;
+
+        let currentTopVal = workingTop[currentStep];
+
+        if (currentTopVal < digitBottom) {
+            const userBorrowVal = document.getElementById(`borrow-${currentStep}`).value;
+            if (userBorrowVal != currentTopVal + 10) {
+                document.getElementById("feedback").innerHTML = `⚠️ <b>Perlu Meminjam!</b> Angka ${currentTopVal} kurang dari ${digitBottom}. Pinjam 1 puluhan dari sebelahnya dan ketik nilai baru <b>(${currentTopVal + 10})</b> pada kotak oranye!`;
+                return;
+            }
+
+            workingTop[currentStep] += 10;
+            let leftCol = currentStep - 1;
+            workingTop[leftCol] -= 1;
+
+            document.getElementById(`top-${leftCol}`).classList.add("strikethrough");
+            document.getElementById(`borrow-${leftCol}`).value = workingTop[leftCol];
+        }
+
+        const expectedAns = workingTop[currentStep] - digitBottom;
+        if (parseInt(userAns) === expectedAns) {
+            document.getElementById("feedback").innerHTML = `✅ <b>Hebat!</b> Pengurangan pada kolom ${allPlaceNames[currentStep]} sudah benar!`;
+            currentStep--;
+            setTimeout(updateStepUI, 700);
+        } else {
+            document.getElementById("feedback").innerHTML = `❌ <b>Hampir Tepat!</b> Coba hitung lagi: <b>${workingTop[currentStep]} − ${digitBottom}</b>.`;
+        }
+    }
+
+    function showHint() {
+        const startIndex = 6 - numDigits;
+        if (currentStep < startIndex) return;
+
+        const str2 = String(num2).padStart(6, '0');
+        const dTop = workingTop[currentStep];
+        const dBottom = parseInt(str2[currentStep]);
+
+        if (dTop < dBottom) {
+            document.getElementById("feedback").innerHTML = `💡 <b>Petunjuk:</b> Karena ${dTop} lebih kecil dari ${dBottom}, kamu harus meminjam 1 dari kolom ${allPlaceNames[currentStep-1]}. Nilai ${dTop} bertambah 10 menjadi <b>${dTop + 10}</b>. Lalu hitung <b>(${dTop + 10}) − ${dBottom}</b>.`;
+        } else {
+            document.getElementById("feedback").innerHTML = `💡 <b>Petunjuk:</b> Hitung langsung pengurangan: <b>${dTop} − ${dBottom}</b>.`;
+        }
+    }
+
+    function showCelebration() {
+        document.getElementById("celebration").style.display = "flex";
+    }
+
+    function closeCelebration() {
+        document.getElementById("celebration").style.display = "none";
+        initGame();
+    }
+
+    initGame();
+</script>
+
+</body>
+</html>
