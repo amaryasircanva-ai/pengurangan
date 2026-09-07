@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Media Pembelajaran: Pengurangan Bersusun</title>
+    <title>Media Pembelajaran & Game: Pengurangan Bersusun</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -11,11 +11,13 @@
             --secondary-green: #10b981;
             --borrow-orange: #f97316;
             --answer-purple: #8b5cf6;
+            --playful-pink: #ec4899;
+            --playful-yellow: #f59e0b;
             --bg-playful: #f0f9ff;
             --card-white: #ffffff;
             --text-dark: #1e293b;
-            --border-radius-lg: 20px;
-            --border-radius-sm: 12px;
+            --border-radius-lg: 24px;
+            --border-radius-sm: 16px;
         }
 
         * {
@@ -27,8 +29,8 @@
 
         body {
             background-color: var(--bg-playful);
-            background-image: radial-gradient(#cbd5e1 1.5px, transparent 1.5px);
-            background-size: 24px 24px;
+            background-image: radial-gradient(#cbd5e1 2px, transparent 2px);
+            background-size: 28px 28px;
             color: var(--text-dark);
             display: flex;
             flex-direction: column;
@@ -40,10 +42,10 @@
             overflow-x: hidden;
         }
 
-        /* Navigasi Topbar */
+        /* Topbar Navigasi */
         .nav-topbar {
             width: 100%;
-            max-width: 820px;
+            max-width: 860px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -55,19 +57,21 @@
             text-decoration: none;
             background: #ffffff;
             color: var(--text-dark);
-            font-weight: 600;
-            padding: 10px 18px;
+            font-weight: 700;
+            padding: 10px 20px;
             border-radius: var(--border-radius-sm);
-            border: 2px solid #e2e8f0;
-            font-size: 0.95rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+            border: 3px solid #e2e8f0;
+            font-size: 1rem;
+            box-shadow: 0 4px 0 #cbd5e1;
             transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .nav-btn:hover {
-            background: #f8fafc;
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 6px 0 #cbd5e1;
         }
 
         .nav-btn.btn-back {
@@ -77,18 +81,43 @@
             box-shadow: 0 4px 0 #1d4ed8;
         }
 
-        .nav-btn.btn-back:hover {
-            background: #2563eb;
-            box-shadow: 0 6px 0 #1d4ed8;
+        /* Mode Switcher Tabs */
+        .mode-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            width: 100%;
+            max-width: 860px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 14px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: 3px solid #cbd5e1;
+            border-radius: var(--border-radius-sm);
+            background: white;
+            color: var(--text-dark);
+            cursor: pointer;
+            box-shadow: 0 4px 0 #cbd5e1;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--playful-pink);
+            color: white;
+            border-color: #be185d;
+            box-shadow: 0 4px 0 #be185d;
         }
 
         .app-container {
             background: var(--card-white);
             border-radius: var(--border-radius-lg);
-            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.15);
-            border: 4px solid #e0f2fe;
+            box-shadow: 0 16px 36px rgba(59, 130, 246, 0.2);
+            border: 5px solid #bae6fd;
             width: 100%;
-            max-width: 820px;
+            max-width: 860px;
             padding: 28px;
             display: flex;
             flex-direction: column;
@@ -104,15 +133,15 @@
 
         header h1 {
             color: var(--primary-blue);
-            font-size: 2.2rem;
-            text-shadow: 2px 2px 0px #dbeafe;
+            font-size: 2.3rem;
+            text-shadow: 3px 3px 0px #dbeafe;
             letter-spacing: 0.5px;
         }
 
         header p {
             color: #64748b;
-            font-size: 1.1rem;
-            font-weight: 500;
+            font-size: 1.15rem;
+            font-weight: 600;
         }
 
         .controls {
@@ -122,9 +151,9 @@
             justify-content: space-between;
             align-items: center;
             background: #f8fafc;
-            padding: 12px 16px;
-            border-radius: 16px;
-            border: 2px solid #e2e8f0;
+            padding: 14px 18px;
+            border-radius: 18px;
+            border: 3px solid #e2e8f0;
         }
 
         .control-group {
@@ -137,9 +166,9 @@
         select, button, input[type="number"] {
             padding: 10px 14px;
             border-radius: var(--border-radius-sm);
-            border: 2px solid #cbd5e1;
-            font-size: 0.95rem;
-            font-weight: 600;
+            border: 3px solid #cbd5e1;
+            font-size: 1rem;
+            font-weight: 700;
             cursor: pointer;
             outline: none;
             transition: all 0.2s ease;
@@ -153,33 +182,33 @@
             background-color: var(--primary-blue);
             color: white;
             border: none;
-            box-shadow: 0 4px 0 #1d4ed8;
+            box-shadow: 0 5px 0 #1d4ed8;
             transform: translateY(0);
         }
 
         button:hover {
             opacity: 0.95;
             transform: translateY(-2px);
-            box-shadow: 0 6px 0 #1d4ed8;
+            box-shadow: 0 7px 0 #1d4ed8;
         }
 
         button:active {
-            transform: translateY(2px);
+            transform: translateY(3px);
             box-shadow: 0 2px 0 #1d4ed8;
         }
 
         .btn-hint {
-            background-color: #f59e0b;
-            box-shadow: 0 4px 0 #b45309;
+            background-color: var(--playful-yellow);
+            box-shadow: 0 5px 0 #b45309;
         }
-        .btn-hint:hover { box-shadow: 0 6px 0 #b45309; }
+        .btn-hint:hover { box-shadow: 0 7px 0 #b45309; }
 
         .btn-next {
             background-color: var(--secondary-green);
-            box-shadow: 0 4px 0 #047857;
+            box-shadow: 0 5px 0 #047857;
             font-size: 1.1rem;
         }
-        .btn-next:hover { box-shadow: 0 6px 0 #047857; }
+        .btn-next:hover { box-shadow: 0 7px 0 #047857; }
 
         /* Workspace & Dynamic Grid Alignment */
         .workspace-wrapper {
@@ -225,7 +254,7 @@
         .borrow-box {
             width: 72px;
             height: 48px;
-            border: 2.5px dashed var(--borrow-orange);
+            border: 3px dashed var(--borrow-orange);
             background: #fff7ed;
             color: var(--borrow-orange);
             font-size: 1.3rem;
@@ -321,6 +350,108 @@
             justify-content: space-between;
         }
 
+        /* --- STYLES PERMAINAN BALAP MOBIL --- */
+        #game-section {
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .race-track-container {
+            background: #334155;
+            border: 4px solid #1e293b;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lane {
+            background: #475569;
+            border-dasharray: 10;
+            border-bottom: 3px dashed #94a3b8;
+            padding-bottom: 12px;
+            position: relative;
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .lane:last-child {
+            border-bottom: none;
+        }
+
+        .finish-line {
+            position: absolute;
+            right: 20px;
+            top: 0;
+            bottom: 0;
+            width: 18px;
+            background: repeating-linear-gradient(
+                0deg,
+                #000,
+                #000 10px,
+                #fff 10px,
+                #fff 20px
+            );
+            border-radius: 4px;
+        }
+
+        /* PERBAIKAN: Arah mobil dibalik (scaleX(-1)) agar menghadap ke kanan */
+        .car {
+            font-size: 2.8rem;
+            position: absolute;
+            left: 10px;
+            transform: scaleX(-1);
+            transition: left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            filter: drop-shadow(-2px 4px 6px rgba(0,0,0,0.3));
+        }
+
+        .players-arena {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .player-card {
+            background: #f8fafc;
+            border: 4px solid #cbd5e1;
+            border-radius: 20px;
+            padding: 18px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .player-card.p1 { border-color: #ef4444; }
+        .player-card.p2 { border-color: #3b82f6; }
+
+        .player-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .math-question {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            background: white;
+            padding: 10px;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .game-input {
+            width: 100%;
+            text-align: center;
+            font-size: 1.5rem;
+            padding: 8px;
+        }
+
         /* Thumbs Up Celebration Popup */
         .celebration-overlay {
             display: none;
@@ -369,26 +500,20 @@
             color: #64748b;
         }
 
-        @media (max-width: 600px) {
-            .nav-topbar {
-                flex-direction: row;
-            }
-            .nav-btn {
-                font-size: 0.8rem;
-                padding: 8px 12px;
+        @media (max-width: 650px) {
+            .players-arena {
+                grid-template-columns: 1fr;
             }
             .box-cell, .num-ans {
                 width: 48px;
                 height: 52px;
                 font-size: 1.3rem;
             }
-
             .borrow-box {
                 width: 48px;
                 height: 38px;
                 font-size: 1rem;
             }
-
             .place-header { font-size: 0.65rem; }
             .grid-divider::before { right: -20px; font-size: 2rem; top: -18px; }
         }
@@ -396,75 +521,128 @@
 </head>
 <body>
 
-<!-- Navigasi Tombol Kembali -->
+<!-- Navigasi Keluar Folder -->
 <nav class="nav-topbar">
     <a href="../index.html" class="nav-btn">🏠 Dashboard FERLINK</a>
     <a href="../matematika.html" class="nav-btn btn-back">← Kembali ke Matematika</a>
 </nav>
 
-<div class="app-container">
-    <header>
-        <h1>✏️ Pengurangan Bersusun</h1>
-        <p>Belajar Berhitung Nilai Tempat Jadi Mudah & Seru!</p>
-    </header>
-
-    <div class="controls">
-        <div class="control-group">
-            <label for="digit-select"><b>Jangkauan Bilangan:</b></label>
-            <select id="digit-select" onchange="initGame()">
-                <option value="4">Ribuan (4 Digit)</option>
-                <option value="5">Puluh Ribuan (5 Digit)</option>
-                <option value="6" selected>Ratus Ribuan (6 Digit)</option>
-            </select>
-        </div>
-
-        <div class="control-group">
-            <label for="level-select"><b>Kondisi:</b></label>
-            <select id="level-select" onchange="initGame()">
-                <option value="1">Tanpa Meminjam</option>
-                <option value="2" selected>Meminjam 1 Kali</option>
-                <option value="3">Meminjam Berkali-kali</option>
-            </select>
-        </div>
-
-        <button onclick="initGame()">🔄 Soal Baru</button>
-    </div>
-
-    <div class="custom-input-card">
-        <div class="control-group">
-            <span><b>Atau Buat Soal Sendiri:</b></span>
-        </div>
-        <div class="control-group">
-            <input type="number" id="custom-num1" placeholder="Bil. Atas">
-            <span>−</span>
-            <input type="number" id="custom-num2" placeholder="Bil. Bawah">
-            <button onclick="setCustomProblem()">Set Soal</button>
-        </div>
-    </div>
-
-    <div class="workspace-wrapper">
-        <div class="workspace-grid" id="workspace-grid">
-            <!-- Grid di-generate dinamis lewat JavaScript -->
-        </div>
-    </div>
-
-    <div class="feedback-box" id="feedback">
-        Petunjuk langkah akan muncul di sini.
-    </div>
-
-    <div class="controls" style="background: transparent; border: none; padding: 0;">
-        <button class="btn-hint" onclick="showHint()">💡 Bantuan</button>
-        <button class="btn-next" onclick="validateCurrentStep()">Cek & Lanjut ➔</button>
-    </div>
+<!-- Tab Pilihan Mode -->
+<div class="mode-tabs">
+    <button class="tab-btn active" id="tab-learn" onclick="switchMode('learn')">📖 Belajar Bersusun</button>
+    <button class="tab-btn" id="tab-game" onclick="switchMode('game')">🏎️ Lomba Balap Mobil</button>
 </div>
 
-<!-- Animasi Pop-up Jempol Selesai -->
+<div class="app-container">
+    
+    <!-- MODE 1: BELAJAR BERSUSUN -->
+    <div id="learn-section">
+        <header>
+            <h1>✏️ Pengurangan Bersusun</h1>
+            <p>Belajar Berhitung Nilai Tempat Jadi Mudah & Seru!</p>
+        </header>
+
+        <div class="controls" style="margin-top: 15px;">
+            <div class="control-group">
+                <label for="digit-select"><b>Jangkauan Bilangan:</b></label>
+                <select id="digit-select" onchange="initGame()">
+                    <option value="4">Ribuan (4 Digit)</option>
+                    <option value="5">Puluh Ribuan (5 Digit)</option>
+                    <option value="6" selected>Ratus Ribuan (6 Digit)</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="level-select"><b>Kondisi:</b></label>
+                <select id="level-select" onchange="initGame()">
+                    <option value="1">Tanpa Meminjam</option>
+                    <option value="2" selected>Meminjam 1 Kali</option>
+                    <option value="3">Meminjam Berkali-kali</option>
+                </select>
+            </div>
+
+            <button onclick="initGame()">🔄 Soal Baru</button>
+        </div>
+
+        <div class="custom-input-card" style="margin-top: 15px;">
+            <div class="control-group">
+                <span><b>Buat Soal Sendiri:</b></span>
+            </div>
+            <div class="control-group">
+                <input type="number" id="custom-num1" placeholder="Bil. Atas">
+                <span>−</span>
+                <input type="number" id="custom-num2" placeholder="Bil. Bawah">
+                <button onclick="setCustomProblem()">Set Soal</button>
+            </div>
+        </div>
+
+        <div class="workspace-wrapper" style="margin-top: 15px;">
+            <div class="workspace-grid" id="workspace-grid">
+                <!-- Grid di-generate dinamis via JS -->
+            </div>
+        </div>
+
+        <div class="feedback-box" id="feedback" style="margin-top: 15px;">
+            Petunjuk langkah akan muncul di sini.
+        </div>
+
+        <div class="controls" style="background: transparent; border: none; padding: 0; margin-top: 15px;">
+            <button class="btn-hint" onclick="showHint()">💡 Bantuan</button>
+            <button class="btn-next" onclick="validateCurrentStep()">Cek & Lanjut ➔</button>
+        </div>
+    </div>
+
+    <!-- MODE 2: PERMAINAN BALAP MOBIL 2 PEMAIN -->
+    <div id="game-section">
+        <header>
+            <h1>🏎️ Balap Mobil Pengurangan</h1>
+            <p>Jawab 5 Soal dengan Cepat untuk Mencapai Garis Finish!</p>
+        </header>
+
+        <!-- Lintasan Balap -->
+        <div class="race-track-container">
+            <div class="finish-line"></div>
+            <div class="lane">
+                <div class="car" id="car1">🏎️</div>
+            </div>
+            <div class="lane">
+                <div class="car" id="car2">🛺</div>
+            </div>
+        </div>
+
+        <!-- Area Soal 2 Pemain -->
+        <div class="players-arena">
+            <!-- Pemain 1 -->
+            <div class="player-card p1">
+                <div class="player-title" style="color: #ef4444;">🔴 Pemain 1 (Mobil Merah)</div>
+                <div style="font-size: 0.95rem; font-weight: 600;">Kemajuan: <span id="p1-progress">0</span>/5 Soal</div>
+                <div class="math-question" id="p1-question">15 − 7 = ?</div>
+                <input type="number" id="p1-ans" class="game-input" placeholder="Jawaban">
+                <button style="background: #ef4444; box-shadow: 0 4px 0 #b91c1c;" onclick="checkRaceAnswer(1)">Jawab 🚀</button>
+            </div>
+
+            <!-- Pemain 2 -->
+            <div class="player-card p2">
+                <div class="player-title" style="color: #3b82f6;">🔵 Pemain 2 (Mobil Biru)</div>
+                <div style="font-size: 0.95rem; font-weight: 600;">Kemajuan: <span id="p2-progress">0</span>/5 Soal</div>
+                <div class="math-question" id="p2-question">18 − 9 = ?</div>
+                <input type="number" id="p2-ans" class="game-input" placeholder="Jawaban">
+                <button style="background: #3b82f6; box-shadow: 0 4px 0 #1d4ed8;" onclick="checkRaceAnswer(2)">Jawab 🚀</button>
+            </div>
+        </div>
+
+        <button style="background: var(--playful-pink); box-shadow: 0 5px 0 #be185d; padding: 12px;" onclick="resetRaceGame()">🔄 Ulangi Balapan</button>
+    </div>
+
+</div>
+
+<!-- Animasi Pop-up Selesai -->
 <div class="celebration-overlay" id="celebration">
     <div class="celebration-card">
-        <div class="thumbs-up-icon">👍</div>
-        <h2 style="color: var(--primary-blue); margin-top: 10px; font-size: 2rem;">Luar Biasa!</h2>
-        <p style="font-size: 1.2rem; color: #475569; margin: 10px 0;">Kamu berhasil menyelesaikan seluruh perhitungan dengan benar!</p>
-        <button onclick="closeCelebration()" style="margin-top: 15px; font-size: 1.1rem; padding: 12px 24px;">Lanjut Soal Berikutnya 🚀</button>
+        <div class="thumbs-up-icon" id="celeb-icon">🏆</div>
+        <h2 id="celeb-title" style="color: var(--primary-blue); margin-top: 10px; font-size: 2rem;">Luar Biasa!</h2>
+        <p id="celeb-msg" style="font-size: 1.2rem; color: #475569; margin: 10px 0;">Kamu berhasil menyelesaikan seluruh perhitungan!</p>
+        <button onclick="closeCelebration()" style="margin-top: 15px; font-size: 1.1rem; padding: 12px 24px;">Lanjut Lagi 🚀</button>
     </div>
 </div>
 
@@ -473,6 +651,28 @@
 </footer>
 
 <script>
+    /* --- LOGIK MODE SWITCHING --- */
+    function switchMode(mode) {
+        const learnSec = document.getElementById("learn-section");
+        const gameSec = document.getElementById("game-section");
+        const tabLearn = document.getElementById("tab-learn");
+        const tabGame = document.getElementById("tab-game");
+
+        if (mode === 'learn') {
+            learnSec.style.display = "block";
+            gameSec.style.display = "none";
+            tabLearn.classList.add("active");
+            tabGame.classList.remove("active");
+        } else {
+            learnSec.style.display = "none";
+            gameSec.style.display = "flex";
+            tabLearn.classList.remove("active");
+            tabGame.classList.add("active");
+            resetRaceGame();
+        }
+    }
+
+    /* --- LOGIK MODE BELAJAR BERSUSUN --- */
     let numDigits = 6;
     let num1 = 543216;
     let num2 = 278459;
@@ -486,7 +686,6 @@
         numDigits = parseInt(document.getElementById("digit-select").value);
         const level = document.getElementById("level-select").value;
 
-        // Generate angka acak/preset sesuai jumlah digit & level
         if (numDigits === 4) {
             num1 = level === "1" ? 8765 : (level === "2" ? 7432 : 5000);
             num2 = level === "1" ? 2341 : (level === "2" ? 2819 : 2789);
@@ -509,33 +708,12 @@
 
         const startIndex = 6 - numDigits;
 
-        // Row 1: Headers
-        for (let i = startIndex; i < 6; i++) {
-            grid.innerHTML += `<div class="place-header">${allHeaderTitles[i]}</div>`;
-        }
-
-        // Row 2: Borrow Boxes
-        for (let i = startIndex; i < 6; i++) {
-            grid.innerHTML += `<input type="number" id="borrow-${i}" class="borrow-box">`;
-        }
-
-        // Row 3: Top Numbers
-        for (let i = startIndex; i < 6; i++) {
-            grid.innerHTML += `<div id="top-${i}" class="box-cell num-top">0</div>`;
-        }
-
-        // Row 4: Bottom Numbers
-        for (let i = startIndex; i < 6; i++) {
-            grid.innerHTML += `<div id="bottom-${i}" class="box-cell num-bottom">0</div>`;
-        }
-
-        // Row 5: Divider
+        for (let i = startIndex; i < 6; i++) grid.innerHTML += `<div class="place-header">${allHeaderTitles[i]}</div>`;
+        for (let i = startIndex; i < 6; i++) grid.innerHTML += `<input type="number" id="borrow-${i}" class="borrow-box">`;
+        for (let i = startIndex; i < 6; i++) grid.innerHTML += `<div id="top-${i}" class="box-cell num-top">0</div>`;
+        for (let i = startIndex; i < 6; i++) grid.innerHTML += `<div id="bottom-${i}" class="box-cell num-bottom">0</div>`;
         grid.innerHTML += `<div class="grid-divider" style="grid-column: span ${numDigits};"></div>`;
-
-        // Row 6: Answer Boxes
-        for (let i = startIndex; i < 6; i++) {
-            grid.innerHTML += `<input type="number" id="ans-${i}" class="num-ans" placeholder="?">`;
-        }
+        for (let i = startIndex; i < 6; i++) grid.innerHTML += `<input type="number" id="ans-${i}" class="num-ans" placeholder="?">`;
     }
 
     function setCustomProblem() {
@@ -543,7 +721,7 @@
         const val2 = parseInt(document.getElementById("custom-num2").value);
 
         if (isNaN(val1) || isNaN(val2) || val1 < val2) {
-            alert("Harap masukkan dua bilangan valid! Bilangan Atas harus lebih besar dari Bilangan Bawah.");
+            alert("Harap masukkan dua bilangan valid! Bilangan Atas harus lebih besar.");
             return;
         }
 
@@ -552,7 +730,6 @@
         if (numDigits > 6) numDigits = 6;
 
         document.getElementById("digit-select").value = numDigits;
-
         num1 = val1;
         num2 = val2;
 
@@ -599,7 +776,7 @@
             document.getElementById("feedback").innerHTML = `🎯 <b>Langkah ${6 - currentStep}:</b> Kerjakan kolom <b>${allPlaceNames[currentStep]}</b>.`;
         } else {
             document.getElementById("feedback").innerHTML = `🎉 <b>Hore, Luar Biasa!</b> Seluruh soal berhasil diselesaikan! 🌟`;
-            showCelebration();
+            showCelebration("👍", "Luar Biasa!", "Kamu berhasil menyelesaikan perhitungan dengan benar!");
         }
     }
 
@@ -616,7 +793,7 @@
         if (currentTopVal < digitBottom) {
             const userBorrowVal = document.getElementById(`borrow-${currentStep}`).value;
             if (userBorrowVal != currentTopVal + 10) {
-                document.getElementById("feedback").innerHTML = `⚠️ <b>Perlu Meminjam!</b> Angka ${currentTopVal} kurang dari ${digitBottom}. Pinjam 1 puluhan dari sebelahnya dan ketik nilai baru <b>(${currentTopVal + 10})</b> pada kotak oranye!`;
+                document.getElementById("feedback").innerHTML = `⚠️ <b>Perlu Meminjam!</b> Angka ${currentTopVal} kurang dari ${digitBottom}. Pinjam 1 puluhan dari sebelahnya dan ketik <b>(${currentTopVal + 10})</b> di kotak oranye!`;
                 return;
             }
 
@@ -630,7 +807,7 @@
 
         const expectedAns = workingTop[currentStep] - digitBottom;
         if (parseInt(userAns) === expectedAns) {
-            document.getElementById("feedback").innerHTML = `✅ <b>Hebat!</b> Pengurangan pada kolom ${allPlaceNames[currentStep]} sudah benar!`;
+            document.getElementById("feedback").innerHTML = `✅ <b>Hebat!</b> Pengurangan pada kolom ${allPlaceNames[currentStep]} benar!`;
             currentStep--;
             setTimeout(updateStepUI, 700);
         } else {
@@ -647,19 +824,93 @@
         const dBottom = parseInt(str2[currentStep]);
 
         if (dTop < dBottom) {
-            document.getElementById("feedback").innerHTML = `💡 <b>Petunjuk:</b> Karena ${dTop} lebih kecil dari ${dBottom}, kamu harus meminjam 1 dari kolom ${allPlaceNames[currentStep-1]}. Nilai ${dTop} bertambah 10 menjadi <b>${dTop + 10}</b>. Lalu hitung <b>(${dTop + 10}) − ${dBottom}</b>.`;
+            document.getElementById("feedback").innerHTML = `💡 <b>Petunjuk:</b> Pinjam 1 dari kolom ${allPlaceNames[currentStep-1]}. Hitung <b>(${dTop + 10}) − ${dBottom}</b>.`;
         } else {
-            document.getElementById("feedback").innerHTML = `💡 <b>Petunjuk:</b> Hitung langsung pengurangan: <b>${dTop} − ${dBottom}</b>.`;
+            document.getElementById("feedback").innerHTML = `💡 <b>Petunjuk:</b> Hitung langsung: <b>${dTop} − ${dBottom}</b>.`;
         }
     }
 
-    function showCelebration() {
+    /* --- LOGIK GAME PERLOMBAAN BALAP MOBIL --- */
+    let p1Score = 0;
+    let p2Score = 0;
+    let p1CurrentAns = 0;
+    let p2CurrentAns = 0;
+
+    function resetRaceGame() {
+        p1Score = 0;
+        p2Score = 0;
+        updateCarPositions();
+        generateRaceQuestion(1);
+        generateRaceQuestion(2);
+    }
+
+    function generateRaceQuestion(player) {
+        const a = Math.floor(Math.random() * 40) + 10;
+        const b = Math.floor(Math.random() * a);
+        const ans = a - b;
+
+        if (player === 1) {
+            p1CurrentAns = ans;
+            document.getElementById("p1-question").innerText = `${a} − ${b} = ?`;
+            document.getElementById("p1-ans").value = "";
+            document.getElementById("p1-progress").innerText = p1Score;
+        } else {
+            p2CurrentAns = ans;
+            document.getElementById("p2-question").innerText = `${a} − ${b} = ?`;
+            document.getElementById("p2-ans").value = "";
+            document.getElementById("p2-progress").innerText = p2Score;
+        }
+    }
+
+    function checkRaceAnswer(player) {
+        if (player === 1) {
+            const input = parseInt(document.getElementById("p1-ans").value);
+            if (input === p1CurrentAns) {
+                p1Score++;
+                generateRaceQuestion(1);
+            } else {
+                alert("Jawaban Pemain 1 kurang tepat, coba lagi!");
+            }
+        } else {
+            const input = parseInt(document.getElementById("p2-ans").value);
+            if (input === p2CurrentAns) {
+                p2Score++;
+                generateRaceQuestion(2);
+            } else {
+                alert("Jawaban Pemain 2 kurang tepat, coba lagi!");
+            }
+        }
+
+        updateCarPositions();
+
+        // Cek Pemenang (5 Soal)
+        if (p1Score >= 5) {
+            showCelebration("🏁", "Pemain 1 Menang!", "Mobil Merah berhasil mencapai garis Finish lebih dulu! 🏎️💨");
+        } else if (p2Score >= 5) {
+            showCelebration("🏁", "Pemain 2 Menang!", "Mobil Biru berhasil mencapai garis Finish lebih dulu! 🛺💨");
+        }
+    }
+
+    function updateCarPositions() {
+        const trackWidth = document.querySelector('.race-track-container').clientWidth - 100;
+        const p1Left = 10 + (p1Score / 5) * trackWidth;
+        const p2Left = 10 + (p2Score / 5) * trackWidth;
+
+        document.getElementById("car1").style.left = `${p1Left}px`;
+        document.getElementById("car2").style.left = `${p2Left}px`;
+    }
+
+    /* --- POPUP CELEBRATION --- */
+    function showCelebration(icon, title, msg) {
+        document.getElementById("celeb-icon").innerText = icon;
+        document.getElementById("celeb-title").innerText = title;
+        document.getElementById("celeb-msg").innerText = msg;
         document.getElementById("celebration").style.display = "flex";
     }
 
     function closeCelebration() {
         document.getElementById("celebration").style.display = "none";
-        initGame();
+        if (p1Score >= 5 || p2Score >= 5) resetRaceGame();
     }
 
     initGame();
